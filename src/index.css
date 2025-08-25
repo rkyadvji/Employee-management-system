@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  color: #fff;
+}
+body {
+  background-color: #111;
+}
+
+/* hide scrollbar cross-browser */
+#tasklist {
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE 10+ */
+}
+#tasklist::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+
