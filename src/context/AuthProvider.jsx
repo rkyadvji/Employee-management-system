@@ -8,15 +8,16 @@ function AuthProvider({ children }) {
 
     setLocalStorage()
     const [userData, setUserData] = useState(null)
-
-    useEffect(() => {
+    const [ updateState,setUpdateState] = useState(false);
+     useEffect(() => {
         const {employees, admin} = getLocalStorage()
+        // console.log(employees);
         setUserData(employees)
     }, [])
 
     return (
         <div>
-            <AuthContext.Provider value={[userData,setUserData]}>
+            <AuthContext.Provider value={[userData,setUserData,setUpdateState]}>
                 {children}
             </AuthContext.Provider>
         </div>

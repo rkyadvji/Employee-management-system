@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../context/AuthProvider'
+import { getLocalStorage, setLocalStorage } from '../../Utils/localStorage'
 
 function CreateTask() {
 
-    const [userData,setUserData] = useContext(AuthContext)
+    const [userData,setUserData,setUpdateState] = useContext(AuthContext)
     
     const [taskTitle, setTaskTitle] = useState('')
     const [taskDescription, setTaskDescription] = useState('')
@@ -16,21 +17,30 @@ function CreateTask() {
     const submitHandler = (e) =>{
         e.preventDefault();
         // console.log(taskTitle, taskDescription, taskDate, asignTo, category)
+        const newTask1 = {taskTitle, taskDescription, taskDate, asignTo, category, active: false, newTask: true, failed: false, completed: false};
 
-        setNewTask({taskTitle, taskDescription, taskDate, asignTo, category, active: false, newTask: true, failed: false, completed: false})
+        setNewTask(newTask1);
         // console.log(task)
 
         const data = userData
 
-        data.forEach(function(elem){
-            if(asignTo == elem.firstName){
-                elem.tasks.push(newTask)
-                elem.taskCounts.newTask = elem.taskCounts.newTask  + 1
-                console.log(elem)
+        const updatedData = data.map(elem => {
+            if (asignTo === elem.firstName) {
+                return {
+                    ...elem,  // copy object
+                    tasks: [...elem.tasks, newTask1], // copy tasks array + add new task
+                    taskCounts: {
+                        ...elem.taskCounts, // copy nested object
+                        newTask: elem.taskCounts.newTask + 1
+                    }
+                };
             }
-        })
-        setUserData(data)
-        console.log(data)
+            return elem; // unchanged element
+        });
+
+        setUserData(updatedData);
+        localStorage.setItem("employees",JSON.stringify(updatedData));
+
 
         setTaskTitle('')
         setTaskDescription('')
