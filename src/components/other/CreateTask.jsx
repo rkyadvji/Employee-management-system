@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../context/AuthProvider'
-import { getLocalStorage, setLocalStorage } from '../../Utils/localStorage'
+
 
 function CreateTask() {
 
-    const [userData,setUserData,setUpdateState] = useContext(AuthContext)
+    const [userData, setUserData] = useContext(AuthContext)
     
     const [taskTitle, setTaskTitle] = useState('')
     const [taskDescription, setTaskDescription] = useState('')
@@ -16,13 +16,11 @@ function CreateTask() {
 
     const submitHandler = (e) =>{
         e.preventDefault();
-        // console.log(taskTitle, taskDescription, taskDate, asignTo, category)
         const newTask1 = {taskTitle, taskDescription, taskDate, asignTo, category, active: false, newTask: true, failed: false, completed: false};
 
         setNewTask(newTask1);
-        // console.log(task)
 
-        const data = userData
+        const data = userData.employees;
 
         const updatedData = data.map(elem => {
             if (asignTo === elem.firstName) {
@@ -38,7 +36,7 @@ function CreateTask() {
             return elem; // unchanged element
         });
 
-        setUserData(updatedData);
+        setUserData({ ...userData, employees: updatedData });
         localStorage.setItem("employees",JSON.stringify(updatedData));
 
 

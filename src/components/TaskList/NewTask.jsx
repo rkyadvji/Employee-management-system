@@ -5,7 +5,7 @@ const NewTask = ({data}) => {
   const [userData, setUserData] = useContext(AuthContext);
 
   const handleAccept = () => {
-    const updatedData = userData.map(emp => {
+    const updatedData = userData.employees.map(emp => {
       const taskIndex = emp.tasks.findIndex(t => t.taskTitle === data.taskTitle && t.taskDate === data.taskDate);
       if (taskIndex !== -1) {
         const newTasks = [...emp.tasks];
@@ -22,7 +22,7 @@ const NewTask = ({data}) => {
       }
       return emp;
     });
-    setUserData(updatedData);
+    setUserData({ ...userData, employees: updatedData });
     localStorage.setItem('employees', JSON.stringify(updatedData));
   };
 
