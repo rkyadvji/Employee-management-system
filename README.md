@@ -11,6 +11,18 @@ The **Employee Management System** is a professional and responsive frontend app
 ## 🚀 Live Demo
 **View the application live:** [https://ems-rky.vercel.app/](https://ems-rky.vercel.app/)
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="./screenshots/login.png" width="48%" alt="Login Page"/>
+  <img src="./screenshots/admin-dashboard.png" width="48%" alt="Admin Dashboard"/>
+</p>
+
+<p align="center">
+  <img src="./screenshots/employee-dashboard.png" width="48%" alt="Employee Dashboard"/>
+  <img src="./screenshots/assign-task.png" width="48%" alt="Assign Task"/>
+</p>
+
 ## ✨ Features
 - **Admin Authentication**: Secure login for administrators.
 - **Employee Authentication**: Independent portal for individual employees.
