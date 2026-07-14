@@ -49,7 +49,7 @@ function App() {
       )}
 
       {user === "employee" && (
-        <EmployeeDashboard changeUser={setUser} data={loggedInUserData} />
+        <EmployeeDashboard changeUser={setUser} data={userData.find((e) => e.email === loggedInUserData?.email) || loggedInUserData} />
       )}
     </>
   );
